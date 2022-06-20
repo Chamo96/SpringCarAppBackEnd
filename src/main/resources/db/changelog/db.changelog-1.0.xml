@@ -1,0 +1,41 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="1" author="cha">
+        <sql>
+            CREATE TABLE product(
+                id BIGINT NOT NULL AUTO_INCREMENT,
+            name VARCHAR(255) NOT NULL,
+            price DOUBLE,
+            explanation VARCHAR(1000),
+            picture_url VARCHAR(1000),
+
+            CONSTRAINT PK_id PRIMARY KEY(id)
+            );
+        </sql>
+        <rollback>
+            DROP TABLE product;
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2" author="cha">
+        <sql>
+            INSERT INTO product(name,price,explanation,picture_url) VALUES("BMW one", 180000.50, "This is one", "https://i.ibb.co/Xs5ZtCB/1.jpg");
+            INSERT INTO product(name,price,explanation,picture_url) VALUES("BMW two", 190000.50, "This is two", "https://i.ibb.co/TqvQtFv/2.jpg");
+            INSERT INTO product(name,price,explanation,picture_url) VALUES("BMW three", 280000.50, "This is three", "https://i.ibb.co/HK6YMKZ/3.jpg");
+            INSERT INTO product(name,price,explanation,picture_url) VALUES("BMW four", 380000.50, "This is four", "https://i.ibb.co/Hn8rrfV/4.jpg");
+            INSERT INTO product(name,price,explanation,picture_url) VALUES("BMW five", 190000.00, "This is five", "https://i.ibb.co/k1Z6g2d/5.jpg");
+            INSERT INTO product(name,price,explanation,picture_url) VALUES("BMW six", 1750000.50, "This is six", "https://i.ibb.co/4SZKByL/6.jpg");
+        </sql>
+        <rollback>
+            TRUNCATE TABLE product;
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
