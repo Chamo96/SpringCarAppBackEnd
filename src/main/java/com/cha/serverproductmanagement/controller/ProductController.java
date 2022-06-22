@@ -2,9 +2,11 @@ package com.cha.serverproductmanagement.controller;
 
 import com.cha.serverproductmanagement.model.ApiResponse;
 import com.cha.serverproductmanagement.model.Product;
+import com.cha.serverproductmanagement.model.ProductPage;
 import com.cha.serverproductmanagement.model.StringResponse;
 import com.cha.serverproductmanagement.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +38,12 @@ public class ProductController {
         List<Product> allProducts = productService.findAllProducts();
 
         return new ApiResponse<>(allProducts.size(), allProducts);
+    }
+
+    //Pagination sorting and pagination
+    @GetMapping("/api/discover/products")
+    public ResponseEntity<Page<Product>> getProducts(ProductPage productPage) {
+        return new ResponseEntity<>(productService.getProducts(productPage), HttpStatus.OK);
     }
 
     @GetMapping("/api/products/search")
